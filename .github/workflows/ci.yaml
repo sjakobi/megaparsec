@@ -12,19 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: mrkkrp/ormolu-action@v2
+      - uses: mrkkrp/ormolu-action@v4
   build:
     runs-on: ubuntu-latest
     needs: ormolu
     strategy:
       matrix:
-        cabal: ["3.4"]
-        ghc: ["8.8.4", "8.10.5", "9.0.1"]
+        cabal: ["3.6"]
+        ghc: ["8.10.7", "9.0.1", "9.2.1"]
     env:
       CONFIG: "--enable-tests --enable-benchmarks --flags=dev"
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: haskell/actions/setup@v1.2
+      - uses: haskell/actions/setup@v1.2.7
         id: setup-haskell-cabal
         with:
           ghc-version: ${{ matrix.ghc }}
